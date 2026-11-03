@@ -3,7 +3,28 @@ const fs = require('fs');
 const path = require('path');
 const { Pool } = require('pg');
 
-const PORT = 3001;
+// Auto-load .env file if present
+try {
+  const envPath = path.resolve(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    const lines = fs.readFileSync(envPath, 'utf8').split(/\r?\n/);
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) {
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx !== -1) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          const val = trimmed.slice(eqIdx + 1).trim().replace(/^['"]|['"]$/g, '');
+          if (!process.env[key]) {
+            process.env[key] = val;
+          }
+        }
+      }
+    }
+  }
+} catch {}
+
+const PORT = process.env.PORT || 3001;
 const NEON_DB_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_6Sx7ZFUOGmTk@ep-damp-glitter-az6hfwsc-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require';
 
 // Initialize PostgreSQL Pool
