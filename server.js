@@ -59,8 +59,18 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon'
 };
 
-// Helper to parse JSON body
+// Helper to parse JSON body (compatible with standalone Node and Vercel serverless)
 function parseJsonBody(req) {
+  if (req.body) {
+    if (typeof req.body === 'string') {
+      try {
+        return Promise.resolve(JSON.parse(req.body));
+      } catch {
+        return Promise.resolve({});
+      }
+    }
+    return Promise.resolve(req.body);
+  }
   return new Promise((resolve) => {
     let body = '';
     req.on('data', chunk => { body += chunk; });
@@ -83,7 +93,7 @@ function sendJson(res, statusCode, data) {
   res.end(JSON.stringify(data));
 }
 
-const server = http.createServer(async (req, res) => {
+async function handleRequest(req, res) {
   const urlParts = req.url.split('?');
   const pathname = decodeURIComponent(urlParts[0]);
   const query = new URLSearchParams(urlParts[1] || '');
@@ -341,7 +351,9 @@ const server = http.createServer(async (req, res) => {
       res.end(content);
     }
   });
-});
+}
+
+const server = http.createServer(handleRequest);
 
 function startServer(port) {
   server.listen(port, () => {
@@ -360,4 +372,8 @@ function startServer(port) {
   });
 }
 
-startServer(PORT);
+if (require.main === module) {
+  startServer(PORT);
+}
+
+module.exports = handleRequest;
