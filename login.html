@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Rupee Flow — Enterprise-grade client-side personal expense vault. 100% private, zero-knowledge architecture.">
+  <meta name="theme-color" content="#090d16">
+  <title>Rupee Flow — Secure Sign In</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+  <div class="aurora-bg" aria-hidden="true"></div>
+
+  <div class="auth-page-container">
+    <!-- Split Screen: Left Showcase Panel (Visible on Desktop/Tablet) -->
+    <aside class="auth-showcase-panel">
+      <div class="showcase-content">
+        <div class="showcase-brand">
+          <div class="brand-logo">
+            <span class="currency-symbol">₹</span>
+          </div>
+          <div>
+            <h2 class="showcase-brand-title">Rupee Flow</h2>
+            <p class="showcase-brand-subtitle">Personal Financial Vault</p>
+          </div>
+        </div>
+
+        <div class="showcase-hero">
+          <div class="security-shield-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Zero-Knowledge Architecture</span>
+          </div>
+          <h1 class="showcase-headline">Master your money with complete privacy.</h1>
+          <p class="showcase-desc">
+            Rupee Flow runs 100% on your device with cryptographic client-side hashing. No external databases, no third-party trackers, and no bank credentials required.
+          </p>
+        </div>
+
+        <!-- Interactive Feature Highlights -->
+        <div class="showcase-features">
+          <div class="feature-item">
+            <div class="feature-icon-box">⚡</div>
+            <div class="feature-text">
+              <strong>Sub-Second Logging</strong>
+              <span>Record daily spending in under 5 seconds with automatic Indian Rupee (₹) formatting.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon-box">🎯</div>
+            <div class="feature-text">
+              <strong>Monthly Smart Budgets</strong>
+              <span>Visual progress gauges and real-time threshold warnings prevent overspending.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon-box">🛡️</div>
+            <div class="feature-text">
+              <strong>Device-Level Encryption</strong>
+              <span>Your data never travels over the network. Export and backup your data anytime.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust Testimonial Card -->
+        <div class="showcase-security-footer">
+          <div class="system-status-pill">
+            <span class="status-dot"></span>
+            <span>Local Vault Status: Fully Isolated &amp; Secure</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Authentication Form Panel -->
+    <main class="auth-form-panel">
+      <div class="auth-card-modern">
+        <!-- Mobile Brand (shown on small screens) -->
+        <div class="mobile-brand-header">
+          <div class="brand-logo">
+            <span class="currency-symbol">₹</span>
+          </div>
+          <h2 class="mobile-title">Rupee Flow</h2>
+          <p class="mobile-subtitle">Private Expense Vault</p>
+        </div>
+
+        <!-- Tab Controls -->
+        <div class="auth-tabs-segmented" role="tablist">
+          <button type="button" id="tabSignIn" class="segmented-tab active" role="tab" aria-selected="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            <span>Sign In</span>
+          </button>
+          <button type="button" id="tabSignUp" class="segmented-tab" role="tab" aria-selected="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            <span>Create Account</span>
+          </button>
+        </div>
+
+        <!-- Status Message Banner -->
+        <div id="authAlert" class="auth-banner" role="alert" style="display:none;"></div>
+
+        <!-- SIGN IN FORM -->
+        <form id="signInForm" class="auth-form-modern" novalidate autocomplete="on">
+          <div class="form-group-modern">
+            <label for="loginUsername" class="field-label">Username or Email</label>
+            <div class="field-input-box">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <input type="text" id="loginUsername" class="modern-input" placeholder="e.g. barshan or admin" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group-modern">
+            <div class="field-label-row">
+              <label for="loginPassword" class="field-label">Password or PIN</label>
+              <button type="button" id="forgotPassBtn" class="link-action">Forgot PIN?</button>
+            </div>
+            <div class="field-input-box">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="loginPassword" class="modern-input" placeholder="Enter password or master PIN" required autocomplete="current-password">
+              <button type="button" class="btn-toggle-visibility" id="toggleLoginPass" aria-label="Toggle password visibility">
+                <span class="icon-eye">👁️</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-auxiliary-row">
+            <label class="custom-checkbox">
+              <input type="checkbox" id="rememberMe" checked>
+              <span class="checkbox-indicator"></span>
+              <span class="checkbox-text">Keep me logged in for 30 days</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary-gradient btn-full" id="signInSubmitBtn">
+            <span>Unlock Personal Vault</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </form>
+
+        <!-- SIGN UP FORM -->
+        <form id="signUpForm" class="auth-form-modern" style="display:none;" novalidate autocomplete="on">
+          <div class="form-group-modern">
+            <label for="regFullName" class="field-label">Full Name <span class="req">*</span></label>
+            <div class="field-input-box">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <input type="text" id="regFullName" class="modern-input" placeholder="e.g. Barshan" required autocomplete="name">
+            </div>
+          </div>
+
+          <div class="form-group-modern">
+            <label for="regUsername" class="field-label">Account Username <span class="req">*</span></label>
+            <div class="field-input-box">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+              <input type="text" id="regUsername" class="modern-input" placeholder="e.g. barshan" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group-modern">
+            <label for="regPassword" class="field-label">Master Password or PIN <span class="req">*</span></label>
+            <div class="field-input-box">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="regPassword" class="modern-input" placeholder="Min. 4 characters" minlength="4" required autocomplete="new-password">
+              <button type="button" class="btn-toggle-visibility" id="toggleRegPass" aria-label="Toggle password visibility">
+                <span class="icon-eye">👁️</span>
+              </button>
+            </div>
+            <!-- Password Strength Bar -->
+            <div class="password-meter-container">
+              <div class="meter-bar"><div id="strengthFill" class="meter-fill"></div></div>
+              <span id="strengthText" class="meter-text">Enter password</span>
+            </div>
+          </div>
+
+          <div class="form-group-modern">
+            <label for="regPasswordConfirm" class="field-label">Confirm Password or PIN <span class="req">*</span></label>
+            <div class="field-input-box">
+              <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <input type="password" id="regPasswordConfirm" class="modern-input" placeholder="Repeat your password" minlength="4" required autocomplete="new-password">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary-gradient btn-full" id="signUpSubmitBtn">
+            <span>Create Secure Vault</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          </button>
+        </form>
+
+        <div class="auth-divider">
+          <span>or explore instantly</span>
+        </div>
+
+        <!-- Instant Guest Bypass Button -->
+        <button type="button" id="guestBtn" class="btn-guest-premium">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <span>Continue as Guest (No Password Required)</span>
+        </button>
+
+        <div class="auth-security-guarantee">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+          <span>Encrypted with SHA-256 Client-Side Hashing &amp; Same-Origin Isolation</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

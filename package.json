@@ -1,0 +1,12 @@
+{
+  "name": "rupee-flow",
+  "version": "1.3.0",
+  "description": "Rupee Flow — Personal Expense Tracker with Neon PostgreSQL backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}
